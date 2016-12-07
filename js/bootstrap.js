@@ -283,9 +283,9 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
   }
 
   Carousel.DEFAULTS = {
-    interval: 5000,
+    interval: false,
     pause: 'hover',
-    wrap: true
+    wrap: false
   }
 
   Carousel.prototype.cycle =  function (e) {
@@ -438,12 +438,18 @@ if (typeof jQuery === 'undefined') { throw new Error('Bootstrap\'s JavaScript re
     var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) //strip for ie7
     var options = $.extend({}, $target.data(), $this.data())
     var slideIndex = $this.attr('data-slide-to')
+    var slideDirection = $this.attr('data-slide')
+
     if (slideIndex) options.interval = false
 
     $target.carousel(options)
 
     if (slideIndex = $this.attr('data-slide-to')) {
       $target.data('bs.carousel').to(slideIndex)
+    }
+
+    if (slideDirection = $this.attr('data-slide')){
+      $target.data('bs.carousel').to(slideDirection)
     }
 
     e.preventDefault()
